@@ -384,7 +384,6 @@ public class GestionConseiller extends HttpServlet {
 				Compte c1 = null;
 				try {
 					c1 = ic1.recuperationCompte(Integer.parseInt(request.getParameter("idcompte1form")));
-					System.out.println(c1.getIdCompte());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -396,7 +395,6 @@ public class GestionConseiller extends HttpServlet {
 				Compte c2 = null;
 				try {
 					c2 = ic1.recuperationCompte(Integer.parseInt(request.getParameter("idcompte2form")));
-					System.out.println(c2.getIdCompte());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
