@@ -374,6 +374,7 @@ public class GestionConseiller extends HttpServlet {
 			request.setAttribute("resultatvalidation", "Veuillez choisir un compte dans la liste");
 			request.getRequestDispatcher("/interfaceConseiller.jsp").forward(request, response);
 		}
+		// maintenent qu'on a toutes les infos,(comptes et montants) on passe au virement
 		if (request.getParameter("action").equals("fromEffectuervirementphase3")) {
 			if (request.getParameter("montant") != null && request.getParameter("idcompte1form") != null
 					&& request.getParameter("idcompte2form") != null) {
