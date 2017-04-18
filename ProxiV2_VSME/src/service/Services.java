@@ -88,7 +88,7 @@ public class Services implements IConseiller, IGerant {
 
 		
 	/**
-	 * Lister les clients par mot clé (recherche dans le nom)
+	 * Lister les clients par mot clï¿½ (recherche dans le nom)
 	 */
 	@Override
 	public Collection<Client> listerClient(String motcle)
@@ -99,7 +99,7 @@ public class Services implements IConseiller, IGerant {
 	
 	
 	/**
-	 * Virement d'un montant d'un compte c1(débiteur) à un compte c2(créditeur) 
+	 * Virement d'un montant d'un compte c1(dï¿½biteur) ï¿½ un compte c2(crï¿½diteur) 
 	 * @throws MontantSuperieurAuSoldeException 
 	 * @throws DecouvertNonAutorise 
 	 */
@@ -107,9 +107,9 @@ public class Services implements IConseiller, IGerant {
 	@Override
 	public void effectuerVirement(int montant,Compte c1, Compte c2) throws MontantNegatifException, MontantSuperieurAuSoldeException, DecouvertNonAutorise {
 		
-		if (montant<0) //Test si le montant entré est inférieur à 0
+		if (montant<0) //Test si le montant entrï¿½ est infï¿½rieur ï¿½ 0
 		{                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-			throw new MontantNegatifException("montant inférieur à zero");
+			throw new MontantNegatifException("montant infÃ©rieur Ã  zÃ©ro");
 		}
 		else 
 		{
@@ -132,7 +132,7 @@ public class Services implements IConseiller, IGerant {
 			{
 				if(type.equals("courant")) //Test si le compte est un compte Courant
 				{
-					if((c1.getSolde()-montant)>-1000) //Test si le solde du compte viré est au dessus du découvert autorisé
+					if((c1.getSolde()-montant)>-1000) //Test si le solde du compte virï¿½ est au dessus du dï¿½couvert autorisï¿½
 					{
 						idao.effectuerVirement(montant, c1, c2);
 					}
@@ -166,7 +166,7 @@ public class Services implements IConseiller, IGerant {
 			}
 			
 		} else{
-			throw new LeConseillerADeja10Clients("Vous avez déjà 10 clients.");
+			throw new LeConseillerADeja10Clients("Vous avez dï¿½jï¿½ 10 clients.");
 		}	
 	
 	}
@@ -183,23 +183,23 @@ public class Services implements IConseiller, IGerant {
 	
 
 	/**
-	 * Ajout d'un conseiller par un gérant
+	 * Ajout d'un conseiller par un gï¿½rant
 	 */
 	@Override
 	public void ajouterConseiller(int idge, Conseiller co) 
 		{
 		idao.ajouterConseiller(idge, co);
 			
-			/*Collection<Conseiller> col = g.getConseillers(); // Récupère la liste des conseillers du gérant
-			col.add(co); //Ajoute le Conseiller co à la liste col
-			g.setConseillers(col); // Associe la nouvelle liste des conseillers au gérant
-			co.setGerant(g); // Associe le nouveau conseiller à son gérant
+			/*Collection<Conseiller> col = g.getConseillers(); // Rï¿½cupï¿½re la liste des conseillers du gï¿½rant
+			col.add(co); //Ajoute le Conseiller co ï¿½ la liste col
+			g.setConseillers(col); // Associe la nouvelle liste des conseillers au gï¿½rant
+			co.setGerant(g); // Associe le nouveau conseiller ï¿½ son gï¿½rant
 			*/
 			
 		}
 
 	/**
-	 * Modification d'un conseiller par un gérant
+	 * Modification d'un conseiller par un gï¿½rant
 	 */
 		@Override
 		public void modifierConseiller(Conseiller c, Adresse a, String telephone) {
@@ -212,7 +212,7 @@ public class Services implements IConseiller, IGerant {
 		}
 
 	/**
-	 * Suppression d'un conseiller par un gérant
+	 * Suppression d'un conseiller par un gï¿½rant
 	 */
 		@Override
 		public void supprimerConseiller(Conseiller c, int idge) {
@@ -220,15 +220,15 @@ public class Services implements IConseiller, IGerant {
 			idao.supprimerConseiller(c, idge);
 		
 			/*
-			Collection<Conseiller> col1 = g.getConseillers(); //Récupère la liste des conseillers du gérant
+			Collection<Conseiller> col1 = g.getConseillers(); //Rï¿½cupï¿½re la liste des conseillers du gï¿½rant
 			col1.remove(c); //supprimer le conseiller c
-			g.setConseillers(col1); //Associe la nouvelle liste au gérant
+			g.setConseillers(col1); //Associe la nouvelle liste au gï¿½rant
 			*/
 		
 			
 		}
 	/**
-	 * Affichage d'un conseiller par un gérant
+	 * Affichage d'un conseiller par un gï¿½rant
 	 */
 
 		@Override
@@ -273,7 +273,7 @@ public class Services implements IConseiller, IGerant {
 	
 		
 	/**
-	 * Ajout d'un compte Epargne ou un Compte Courant à un client
+	 * Ajout d'un compte Epargne ou un Compte Courant ï¿½ un client
 	 * @throws CompteEpargneExistantException 
 	 * @throws CompteCourantExistantException 
 	 */
@@ -308,7 +308,7 @@ public class Services implements IConseiller, IGerant {
 			IConseiller cs = new Services();
 			co=cs.creationCompte(co);
 			
-			if(co instanceof CompteEpargne){ //Test si le compte à ajouter est un Compte Epargne
+			if(co instanceof CompteEpargne){ //Test si le compte ï¿½ ajouter est un Compte Epargne
 				boolean b=true;
 				for (Compte compte : c.getComptes())
 				{
@@ -317,12 +317,12 @@ public class Services implements IConseiller, IGerant {
 						b=false;
 					}
 				}
-				if(b=true){ // Test pour savoir si le client a déjà un compte epargne
+				if(b=true){ // Test pour savoir si le client a dï¿½jï¿½ un compte epargne
 				
 					c.setComptes((Collection<Compte>) co);
-					System.out.println("Le compte Epargne a été ajouté.");
+					System.out.println("Le compte Epargne a ï¿½tï¿½ ajoutï¿½.");
 				}else{
-					throw new CompteEpargneExistantException("Le client a déjà un Compte Epargne.");
+					throw new CompteEpargneExistantException("Le client a dï¿½jï¿½ un Compte Epargne.");
 				}				
 			
 			}
@@ -336,14 +336,14 @@ public class Services implements IConseiller, IGerant {
 							b2=false;
 						}
 					}
-					if(b2=true){ // Test pour savoir si le client a déjà un compte courant
+					if(b2=true){ // Test pour savoir si le client a dï¿½jï¿½ un compte courant
 					
 						c.setComptes((Collection<Compte>) co);
-						System.out.println("Le compte courant a été ajouté.");
+						System.out.println("Le compte courant a ï¿½tï¿½ ajoutï¿½.");
 											
 					}
 					else{
-						throw new CompteCourantExistantException("Le client a déjà un Compte Courant.");
+						throw new CompteCourantExistantException("Le client a dï¿½jï¿½ un Compte Courant.");
 					}
 				
 				}
@@ -364,9 +364,9 @@ public class Services implements IConseiller, IGerant {
 		public void supprimerClient(Client c, int idcon) {
 			idao.supprimerClient(c, idcon);
 			/*
-			Collection<Client> col = co.getClients(); //Récupération de la liste des clients du conseiller dans la collection col
+			Collection<Client> col = co.getClients(); //Rï¿½cupï¿½ration de la liste des clients du conseiller dans la collection col
 			col.remove(c);	//Suppression du client de la collection
-			co.setClients(col);	//Association de la Collection mise à jour au conseiller
+			co.setClients(col);	//Association de la Collection mise ï¿½ jour au conseiller
 			*/
 		}
 	
@@ -384,7 +384,7 @@ public class Services implements IConseiller, IGerant {
 			idao.supprimerCompteClient(co, c);
 			
 			/*
-			if(co instanceof CompteEpargne){ //Test si le compte à supprimer est un Compte Epargne
+			if(co instanceof CompteEpargne){ //Test si le compte ï¿½ supprimer est un Compte Epargne
 				boolean b=false;
 				for (Compte compte : c.getComptes())
 				{
@@ -396,7 +396,7 @@ public class Services implements IConseiller, IGerant {
 				if(b==true)
 				{
 				co = null;
-				System.out.println("Le compte Epargne a été supprimé.");
+				System.out.println("Le compte Epargne a ï¿½tï¿½ supprimï¿½.");
 				
 				}else{
 					throw new AbsenceDeCompteEpargneException("Le compte n'appartient pas au Client");
@@ -413,11 +413,11 @@ public class Services implements IConseiller, IGerant {
 							b=true;
 						}
 					}// Dans le cas d'une suppression du Compte Courant
-					if(b==true){ // Test pour savoir si le client a déjà un compte courant
+					if(b==true){ // Test pour savoir si le client a dï¿½jï¿½ un compte courant
 						
 						
 						co=null;
-						System.out.println("Le compte courant a été supprimé.");
+						System.out.println("Le compte courant a ï¿½tï¿½ supprimï¿½.");
 											
 					}
 					else{
@@ -433,7 +433,7 @@ public class Services implements IConseiller, IGerant {
 			
 	
 	/**
-	 * Realisation d'une simulation de crédit avec un montant, un taux et une durée de remboursement
+	 * Realisation d'une simulation de crï¿½dit avec un montant, un taux et une durï¿½e de remboursement
 	 * @throws MontantNegatifException 
 	 */
 		@Override
@@ -442,15 +442,15 @@ public class Services implements IConseiller, IGerant {
 			return idao.effectuerSimulationCredit(montant, taux, duree);
 			/*
 			double montantARembourserParMois;
-			if (montant<=0) //Test si le montant entré est inférieur à 0
+			if (montant<=0) //Test si le montant entrï¿½ est infï¿½rieur ï¿½ 0
 			{
 				montantARembourserParMois = 0;
 				throw new MontantNegatifException("montant de remboursement negatif");
 			}
 			else
 			{
-			double montantARembourser = montant*(1+(taux/100)); //Calcul de la somme totale à remboursé (montant avec les interets)
-			montantARembourserParMois = montantARembourser/duree; //Calcul des mensualités à rembourser par le client
+			double montantARembourser = montant*(1+(taux/100)); //Calcul de la somme totale ï¿½ remboursï¿½ (montant avec les interets)
+			montantARembourserParMois = montantARembourser/duree; //Calcul des mensualitï¿½s ï¿½ rembourser par le client
 			}
 			return montantARembourserParMois;
 		*/
@@ -458,13 +458,13 @@ public class Services implements IConseiller, IGerant {
 		}
 
 	/**
-	 * la methode créée un placement et l'ajoute au patrimoine du client
+	 * la methode crï¿½ï¿½e un placement et l'ajoute au patrimoine du client
 	 * 
 	 * @param patrimoine
 	 *            parametre qui donne lepatrimoine du client
 	 * @param typePlacement
 	 *            parametre qui permet de choisir le type de placement
-	 * @return retourne le placement crée
+	 * @return retourne le placement crï¿½e
 	 */
 	public Placement creerPlacement(String typePlacement) {
 
@@ -547,7 +547,7 @@ public class Services implements IConseiller, IGerant {
 
 		
 	/**
-	 * Ajout d'une carte à un compte
+	 * Ajout d'une carte ï¿½ un compte
 	 */
 
 		@Override
@@ -556,7 +556,7 @@ public class Services implements IConseiller, IGerant {
 			idao.activationCarteVisa(c, cv);
 			/*
 				c.setCarteBancaire(cv);
-				System.out.println("La carte " + cv +" a été activée pour le compte " + c);
+				System.out.println("La carte " + cv +" a ï¿½tï¿½ activï¿½e pour le compte " + c);
 				*/
 		}
 
@@ -570,9 +570,17 @@ public class Services implements IConseiller, IGerant {
 			
 			/*
 				c.setCarteBancaire(null);
-				System.out.println("La carte " + cv +" a été supprimée de compte " + c);
+				System.out.println("La carte " + cv +" a ï¿½tï¿½ supprimï¿½e de compte " + c);
 				*/
 		}
+
+	@Override
+	public Compte recuperationCompte(int idcompte) throws SQLException {
+		// TODO Auto-generated method stub
+		return idao.recuperationCompte(idcompte);
+	}
+
+
 
 	
 

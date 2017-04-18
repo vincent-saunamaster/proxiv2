@@ -20,7 +20,7 @@ import service.exception.MontantSuperieurAuSoldeException;
 
 /**
  * 
- * Interface ConseillerClient faisant appelle aux méthodes d'Ajout/Modification/Suppression/Affichage d'un client par un Conseiller
+ * Interface ConseillerClient faisant appelle aux mï¿½thodes d'Ajout/Modification/Suppression/Affichage d'un client par un Conseiller
  * @author ME VS
  * 
  *
@@ -28,7 +28,7 @@ import service.exception.MontantSuperieurAuSoldeException;
  */
 
 public interface IConseiller {
-	
+	public Compte recuperationCompte(int idcompte) throws SQLException;
 	public Collection<Client> recuperationClient(int idCli) throws SQLException;
 	public int authentificationConseiller(String login, String pwd);
 	

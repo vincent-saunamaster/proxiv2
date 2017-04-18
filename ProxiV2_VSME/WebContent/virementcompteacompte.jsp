@@ -45,53 +45,60 @@
 				</form>
 			</c:when>
 			<c:when test="${phase == '2' }">
-			<form method="post"
+				<form method="post"
 					action="GestionConseiller?action=fromEffectuervirementphase2">
-				<table class="table table-bordered table-striped table-condensed">
-					<tr>
-						<th>&nbsp;</th>
-						<th>numéro de compte</th>
-						<th>type de Compte</th>
-						<th>date d'ouverture</th>
-						<th>solde</th>
+					<fieldset id="section-1">
+						<legend>Compte à débiter</legend>
+						<table class="table table-bordered table-striped table-condensed">
+							<tr>
+								<th>&nbsp;</th>
+								<th>numéro de compte</th>
+								<th>type de Compte</th>
+								<th>date d'ouverture</th>
+								<th>solde</th>
 
-					</tr>
-					<c:forEach var="compte" items="${listecomptesclientAdebiter}">
-						<tr>
-							<td><input type="radio" name="idcompte1form"
-								id="idcompte1form"
-								value="<c:out value="${compte.idCompte}"></</c:out>" /></td>
-							<td><c:out value="${compte.numeroCompte}"></</c:out></td>
-							<td><c:out value="${compte.typeCompte}"></</c:out></td>
-							<td><c:out value="${compte.dateOuverture}"></</c:out></td>
-							<td><c:out value="${compte.solde}"></</c:out></td>
+							</tr>
+							<c:forEach var="compte" items="${listecomptesclientAdebiter}">
+								<tr>
+									<td><input type="radio" name="idcompte1form"
+										id="idcompte1form"
+										value="<c:out value="${compte.idCompte}"></c:out>" /></td>
+									<td><c:out value="${compte.numeroCompte}"></c:out></td>
+									<td><c:out value="${compte.typeCompte}"></c:out></td>
+									<td><c:out value="${compte.dateOuverture}"></c:out></td>
+									<td><c:out value="${compte.solde}"></c:out></td>
 
-						</tr>
-					</c:forEach>
-				</table>
-				<table class="table table-bordered table-striped table-condensed">
-					<tr>
-						<th>&nbsp;</th>
-						<th>numéro de compte</th>
-						<th>type de Compte</th>
-						<th>date d'ouverture</th>
-						<th>solde</th>
+								</tr>
+							</c:forEach>
+						</table>
+					</fieldset>
+					<fieldset id="section-1">
+						<legend>Compte à créditer</legend>
+						<table class="table table-bordered table-striped table-condensed">
+							<tr>
+								<th>&nbsp;</th>
+								<th>numéro de compte</th>
+								<th>type de Compte</th>
+								<th>date d'ouverture</th>
+								<th>solde</th>
 
-					</tr>
-					<c:forEach var="compte2" items="${listecomptesclientAcrediter}">
-						<tr>
-							<td><input type="radio" name="idcompte2form"
-								id="idcompte2form"
-								value="<c:out value="${compte2.idCompte}"></</c:out>" /></td>
-							<td><c:out value="${compte2.numeroCompte}"></</c:out></td>
-							<td><c:out value="${compte2.typeCompte}"></</c:out></td>
-							<td><c:out value="${compte2.dateOuverture}"></</c:out></td>
-							<td><c:out value="${compte2.solde}"></</c:out></td>
+							</tr>
+							<c:forEach var="compte2" items="${listecomptesclientAcrediter}">
+								<tr>
+									<td><input type="radio" name="idcompte2form"
+										id="idcompte2form"
+										value="<c:out value="${compte2.idCompte}"></c:out>" /></td>
+									<td><c:out value="${compte2.numeroCompte}"></c:out></td>
+									<td><c:out value="${compte2.typeCompte}"></c:out></td>
+									<td><c:out value="${compte2.dateOuverture}"></c:out></td>
+									<td><c:out value="${compte2.solde}"></c:out></td>
 
-						</tr>
-					</c:forEach>
-				</table>
-				<br /> <input type="submit" name="validerComptesClients" value="suivant"/>
+								</tr>
+							</c:forEach>
+						</table>
+					</fieldset>
+					<br /> <input type="submit" name="validerComptesClients"
+						value="suivant" />
 				</form>
 			</c:when>
 			<c:when test="${phase == '3' }">
@@ -99,16 +106,18 @@
 					action="GestionConseiller?action=fromEffectuervirementphase3">
 					<fieldset id="section-1">
 						<legend> Sélection du montant à transférer </legend>
-						<label for="montant">saisir un montant :</label><input
-							type="text" name="montant" id="montant"
-							value='<c:out value=""></c:out>' /><br /> <br />
+						<input type="hidden" name="idcompte1form"
+							value="${idcompte1form }"> <input type="hidden"
+							name="idcompte2form" value="${idcompte2form }"> <label
+							for="montant">saisir un montant :</label><input type="text"
+							name="montant" id="montant" value='<c:out value=""></c:out>' /><br />
+						<br />
 
 					</fieldset>
 
-					<br /> <input type="submit" name="validerMontant"
-						value="valider" /><br />
+					<br /> <input type="submit" name="validerMontant" value="valider" /><br />
 				</form>
-			
+
 			</c:when>
 		</c:choose>
 	</div>

@@ -34,11 +34,11 @@
 			<c:forEach var="compte" items="${listecomptesclient}">
 				<tr>
 					<td><input type="radio" name="idclientform" id="idclientform"
-						value="<c:out value="${compte.idCompte}"></</c:out>" /></td>
-					<td><c:out value="${compte.numeroCompte}"></</c:out></td>
-					<td><c:out value="${compte.typeCompte}"></</c:out></td>
-					<td><c:out value="${compte.dateOuverture}"></</c:out></td>
-					<td><c:out value="${compte.solde}"></</c:out></td>
+						value="<c:out value="${compte.idCompte}"></c:out>" /></td>
+					<td><c:out value="${compte.numeroCompte}"></c:out></td>
+					<td><c:out value="${compte.typeCompte}"></c:out></td>
+					<td><c:out value="${compte.dateOuverture}"></c:out></td>
+					<td><c:out value="${compte.solde}"></c:out></td>
 
 				</tr>
 			</c:forEach>

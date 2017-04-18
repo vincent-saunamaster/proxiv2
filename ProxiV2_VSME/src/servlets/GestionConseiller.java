@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,7 +19,10 @@ import metier.ClientParticulier;
 import metier.Compte;
 import service.IConseiller;
 import service.Services;
+import service.exception.DecouvertNonAutorise;
 import service.exception.LeConseillerADeja10Clients;
+import service.exception.MontantNegatifException;
+import service.exception.MontantSuperieurAuSoldeException;
 
 /**
  * Servlet implementation class GestionClients
@@ -333,23 +337,22 @@ public class GestionConseiller extends HttpServlet {
 			request.setAttribute("phase", "1");
 			request.removeAttribute("toEffectuervirementphase1");
 			request.getRequestDispatcher("/virementcompteacompte.jsp").forward(request, response);
-
 		}
 		// sélection des comptes
 		if (request.getParameter("action").equals("fromEffectuervirementphase1")) {
 			if (request.getParameter("motcle1") != "" && request.getParameter("motcle2") != "") {
-
-				Collection<Client> colClliDeb = ic1.listerClient(request.getParameter("motcle1"));
-				Collection<Client> colClliCred = ic1.listerClient(request.getParameter("motcle2"));
+				Collection<Client> colClliDeb = (Collection<Client>) ic1.listerClient(request.getParameter("motcle1"));
+				Collection<Client> colClliCred = (Collection<Client>) ic1.listerClient(request.getParameter("motcle2"));
 				Collection<Compte> colCompteDEb = new ArrayList<Compte>();
-				Collection<Compte> colCompteCred = new ArrayList<Compte>();;
+				Collection<Compte> colCompteCred = new ArrayList<Compte>();
+
 				for (Client client1 : colClliDeb) {
-					colCompteDEb.addAll((Collection<Compte>)ic1.listerCompteClient(client1));
-					}
+					colCompteDEb.addAll((Collection<Compte>) ic1.listerCompteClient(client1));
+				}
 				for (Client client2 : colClliCred) {
-					colCompteCred.addAll((Collection<Compte>)ic1.listerCompteClient(client2));
-					}
-				
+					colCompteCred.addAll((Collection<Compte>) ic1.listerCompteClient(client2));
+				}
+
 				request.setAttribute("listecomptesclientAdebiter", colCompteDEb);
 				request.setAttribute("listecomptesclientAcrediter", colCompteCred);
 				request.setAttribute("phase", "2");
@@ -360,13 +363,62 @@ public class GestionConseiller extends HttpServlet {
 			request.getRequestDispatcher("/interfaceConseiller.jsp").forward(request, response);
 		}
 		// sélection du montant
-		if (request.getParameter("effectuervirementphase3") != null) {
-			if (request.getParameter("idcompteform") != null) {
+		if (request.getParameter("action").equals("fromEffectuervirementphase2")) {
+			if (request.getParameter("idcompte1form") != null && request.getParameter("idcompte2form") != null) {
 
-				// ic1.effectuerVirement(montant, c1, c2);
-
+				request.setAttribute("idcompte1form", request.getParameter("idcompte1form"));
+				request.setAttribute("idcompte2form", request.getParameter("idcompte2form"));
+				request.setAttribute("phase", "3");
+				request.getRequestDispatcher("/virementcompteacompte.jsp").forward(request, response);
 			}
-			request.setAttribute("resultatvalidation", "Veuillez choisir un client dans la liste");
+			request.setAttribute("resultatvalidation", "Veuillez choisir un compte dans la liste");
+			request.getRequestDispatcher("/interfaceConseiller.jsp").forward(request, response);
+		}
+		if (request.getParameter("action").equals("fromEffectuervirementphase3")) {
+			if (request.getParameter("montant") != null && request.getParameter("idcompte1form") != null
+					&& request.getParameter("idcompte2form") != null) {
+
+				int montant = Integer.parseInt(request.getParameter("montant"));
+				System.out.println(montant);
+				Compte c1 = null;
+				try {
+					c1 = ic1.recuperationCompte(Integer.parseInt(request.getParameter("idcompte1form")));
+					System.out.println(c1.getIdCompte());
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		
+				Compte c2 = null;
+				try {
+					c2 = ic1.recuperationCompte(Integer.parseInt(request.getParameter("idcompte2form")));
+					System.out.println(c2.getIdCompte());
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					ic1.effectuerVirement(montant, c1, c2);
+				} catch (MontantNegatifException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MontantSuperieurAuSoldeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (DecouvertNonAutorise e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				request.setAttribute("resultatvalidation", "virement effectué");
+				request.getRequestDispatcher("/interfaceConseiller.jsp").forward(request, response);
+			}
+			request.setAttribute("resultatvalidation", "Veuillez choisir un montant");
 			request.getRequestDispatcher("/interfaceConseiller.jsp").forward(request, response);
 		}
 		// page par défaut si connecté en conseiller

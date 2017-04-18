@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -10,7 +9,6 @@ import metier.CarteBancaire;
 import metier.Client;
 import metier.Compte;
 import metier.Conseiller;
-import metier.Gerant;
 import metier.Placement;
 import service.exception.AbsenceDeCompteCourantException;
 import service.exception.AbsenceDeCompteEpargneException;
@@ -23,7 +21,7 @@ import service.exception.MontantSuperieurAuSoldeException;
 
 public interface IDao {
 
-	
+	public Compte recuperationCompte(int idcompte) throws SQLException;
 	public double recuperationSolde(Compte c1) throws SQLException;
 	public int recuperationidAdresse(Client c) throws SQLException;
 	

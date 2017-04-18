@@ -66,13 +66,13 @@
 			</c:if>
 			<table>
 				<tr>
-					<td>&nbsp;<br />
+					<td><br />
 					<input type="submit" name="toModifierClient"
 						value="modifier un client" /></td>
-					<td>&nbsp;<br />
+					<td><br />
 					<input type="submit" name="voircomptesclient"
 						value="voir comptes client" /></td>
-					<td>non fonctionnel<br />
+					<td><br />
 					<input type="submit" name="toEffectuervirementphase1"
 						value="effectuer virement" /></td>
 				</tr>
