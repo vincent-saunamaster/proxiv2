@@ -684,6 +684,12 @@ public class Dao implements IDao {
 				c1.setNumeroCompte(rs1.getInt("numeroCompte"));
 				c1.setSolde(rs1.getDouble("solde"));
 				c1.setTypeCompte(rs1.getString("typeCompte"));
+				
+				Collection<Client> colcli = recuperationClient(rs1.getInt("idClient"));
+				for (Client client : colcli) {
+					c1.setClient(client);
+				}
+				
 				return c1;
 			}
 			if (rs1.getString("typeCompte").equals("epargne")) {
@@ -693,9 +699,13 @@ public class Dao implements IDao {
 				c1.setNumeroCompte(rs1.getInt("numeroCompte"));
 				c1.setSolde(rs1.getDouble("solde"));
 				c1.setTypeCompte(rs1.getString("typeCompte"));
+				Collection<Client> colcli = recuperationClient(rs1.getInt("idClient"));
+				for (Client client : colcli) {
+					c1.setClient(client);
+				}
 				return c1;
 			}
-
+		
 		}
 		return null;
 	}
