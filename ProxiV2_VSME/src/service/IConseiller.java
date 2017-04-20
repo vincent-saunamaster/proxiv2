@@ -29,7 +29,7 @@ import service.exception.MontantSuperieurAuSoldeException;
 
 public interface IConseiller {
 	public Compte recuperationCompte(int idcompte) throws SQLException;
-	public Collection<Client> recuperationClient(int idCli) throws SQLException;
+	public Client recuperationClient(int idCli) throws SQLException;
 	public int authentificationConseiller(String login, String pwd);
 	
 	public void ajouterClient(int idcon, Client c) throws LeConseillerADeja10Clients;

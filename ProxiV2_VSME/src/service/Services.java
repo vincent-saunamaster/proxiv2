@@ -41,7 +41,7 @@ public class Services implements IConseiller, IGerant {
 		return idao.compterNombreClient(idcon);
 	}
 	
-	public Collection<Client> recuperationClient(int idCli) throws SQLException
+	public Client recuperationClient(int idCli) throws SQLException
 	{
 		return idao.recuperationClient(idCli);
 	}

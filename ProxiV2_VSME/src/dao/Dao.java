@@ -558,9 +558,7 @@ public class Dao implements IDao {
 	 * m�thode de r�cup�ration d'un client � partir de son idClient
 	 */
 	@Override
-	public Collection<Client> recuperationClient(int idCli) throws SQLException {
-
-		Collection<Client> cl = new ArrayList<Client>();
+	public Client recuperationClient(int idCli) throws SQLException {
 		Connection conn = DaoConnection.getConnection();
 		String selection = "SELECT nom, prenom, email, adresse, codepostale, ville FROM client, personne, adresse WHERE adresse.idAdresse=personne.idAdresse AND personne.idClient=client.idClient AND personne.idClient = ?";
 		PreparedStatement psselection = conn.prepareStatement(selection);
@@ -573,9 +571,8 @@ public class Dao implements IDao {
 			c1.setPrenom(rs1.getString("prenom"));
 			c1.setSonAdresse(a1);
 			c1.setEmail(rs1.getString("email"));
-			cl.add(c1);
 		}
-		return cl;
+		return null;
 	}
 
 	@Override
@@ -685,12 +682,9 @@ public class Dao implements IDao {
 				c1.setNumeroCompte(rs1.getInt("numeroCompte"));
 				c1.setSolde(rs1.getDouble("solde"));
 				c1.setTypeCompte(rs1.getString("typeCompte"));
-				
-				Collection<Client> colcli = recuperationClient(rs1.getInt("idClient"));
-				for (Client client : colcli) {
-					c1.setClient(client);
-				}
-				
+				Client cli = recuperationClient(rs1.getInt("idClient"));
+				c1.setClient(cli);
+
 				return c1;
 			}
 			if (rs1.getString("typeCompte").equals("epargne")) {
@@ -700,13 +694,12 @@ public class Dao implements IDao {
 				c1.setNumeroCompte(rs1.getInt("numeroCompte"));
 				c1.setSolde(rs1.getDouble("solde"));
 				c1.setTypeCompte(rs1.getString("typeCompte"));
-				Collection<Client> colcli = recuperationClient(rs1.getInt("idClient"));
-				for (Client client : colcli) {
-					c1.setClient(client);
-				}
+				Client cli = recuperationClient(rs1.getInt("idClient"));
+				c1.setClient(cli);
+
 				return c1;
 			}
-		
+
 		}
 		return null;
 	}
