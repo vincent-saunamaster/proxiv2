@@ -52,6 +52,7 @@
 						<table class="table table-bordered table-striped table-condensed">
 							<tr>
 								<th>&nbsp;</th>
+								<th>client</th>
 								<th>numéro de compte</th>
 								<th>type de Compte</th>
 								<th>date d'ouverture</th>
@@ -63,6 +64,8 @@
 									<td><input type="radio" name="idcompte1form"
 										id="idcompte1form"
 										value="<c:out value="${compte.idCompte}"></c:out>" /></td>
+									<td><c:out value="${compte.client.nom}"></c:out>
+										<c:out value="${compte.client.prenom}"></c:out></td>
 									<td><c:out value="${compte.numeroCompte}"></c:out></td>
 									<td><c:out value="${compte.typeCompte}"></c:out></td>
 									<td><c:out value="${compte.dateOuverture}"></c:out></td>
@@ -77,6 +80,7 @@
 						<table class="table table-bordered table-striped table-condensed">
 							<tr>
 								<th>&nbsp;</th>
+								<th>client</th>
 								<th>numéro de compte</th>
 								<th>type de Compte</th>
 								<th>date d'ouverture</th>
@@ -88,6 +92,8 @@
 									<td><input type="radio" name="idcompte2form"
 										id="idcompte2form"
 										value="<c:out value="${compte2.idCompte}"></c:out>" /></td>
+										<td><c:out value="${compte2.client.nom}"></c:out>
+										<c:out value="${compte2.client.prenom}"></c:out></td>
 									<td><c:out value="${compte2.numeroCompte}"></c:out></td>
 									<td><c:out value="${compte2.typeCompte}"></c:out></td>
 									<td><c:out value="${compte2.dateOuverture}"></c:out></td>

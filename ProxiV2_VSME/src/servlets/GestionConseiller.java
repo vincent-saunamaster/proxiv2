@@ -156,7 +156,7 @@ public class GestionConseiller extends HttpServlet {
 					request.setAttribute("validerajouterclientdefaut", "pb");
 					request.getRequestDispatcher("/AjouterClient.jsp").forward(request, response);
 				} else {
-					// sinon en envoie le tout en base de donn�es
+					// sinon on envoie le tout en base de donn�es
 					if (request.getParameter("typeclient").equals("particulier")) {
 						ClientParticulier c = new ClientParticulier();
 						c.setNom(request.getParameter("nom"));

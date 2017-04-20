@@ -216,6 +216,7 @@ public class Dao implements IDao {
 
 			while (rs.next()) {
 				Compte c1 = new Compte();
+				c1.setClient(c);
 				c1.setIdCompte(rs.getInt("idCompte"));
 				c1.setNumeroCompte(rs.getInt("numeroCompte"));
 				c1.setSolde(rs.getDouble("solde"));
