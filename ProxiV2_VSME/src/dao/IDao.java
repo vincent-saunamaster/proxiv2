@@ -40,7 +40,7 @@ public interface IDao {
 	public Compte creationCompte(Compte c);
 	public void ajouterCompteClient (Client c, Compte co) throws CompteEpargneExistantException, CompteCourantExistantException;
 	public void supprimerCompteClient (Compte compte, Client c) throws AbsenceDeCompteEpargneException, AbsenceDeCompteCourantException;
-	public  Collection<Compte> listerCompteClient (Client c);
+	public Collection<Compte> listerCompteClient (Client c);
 	public Collection<Client> listerClient(String motcle);
 	public Client creerClient(Client c);
 	

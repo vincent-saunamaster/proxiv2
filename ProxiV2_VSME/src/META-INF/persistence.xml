@@ -1,0 +1,31 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+             <!-- nom à mettre dans EntityManagerFactory emf = Persistence.createEntityManagerFactory("demoJPA-pu") -->
+    <persistence-unit name="proxiv2">
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class" />
+            
+            <!-- à commenter pour pas voir les resuetes sql dans la console -->
+            <property name="hibernate.show_sql" value="true" />
+            
+            <property name="hibernate.format_sql" value="true" />
+ 
+            <!-- Configuration de la  BDD -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/proxiv2" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="" />
+ 
+            <!-- Spécifie le 'dialecte' SQL utilisé pour communiquer avec la BDD -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+ 
+            <!-- Indique a Hibernate de (re-)créer la BDD au lancement de l'application -->
+            <!-- à commenter après création de la base -->
+           <!-- <property name="hibernate.hbm2ddl.auto" value="create" /> --> 
+        </properties>
+ 
+    </persistence-unit>
+</persistence>
