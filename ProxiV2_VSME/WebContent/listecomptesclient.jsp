@@ -24,7 +24,7 @@
 
 		<table class="table table-bordered table-striped table-condensed">
 			<tr>
-				<th>&nbsp;</th>
+				<th>id compte</th>
 				<th>numéro de compte</th>
 				<th>type de Compte</th>
 				<th>date d'ouverture</th>
@@ -33,8 +33,7 @@
 			</tr>
 			<c:forEach var="compte" items="${listecomptesclient}">
 				<tr>
-					<td><input type="radio" name="idclientform" id="idclientform"
-						value="<c:out value="${compte.idCompte}"></c:out>" /></td>
+					<td><c:out value="${compte.idCompte}"></c:out></td>
 					<td><c:out value="${compte.numeroCompte}"></c:out></td>
 					<td><c:out value="${compte.typeCompte}"></c:out></td>
 					<td><c:out value="${compte.dateOuverture}"></c:out></td>
