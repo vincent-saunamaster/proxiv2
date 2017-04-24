@@ -3,17 +3,33 @@ package metier;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+@Entity
+@DiscriminatorValue("CLIENT")
 public class Client extends Personne {
-	
+	@OneToMany(mappedBy="client")
 	private Collection<Compte> comptes = new ArrayList<Compte>();
+	@Transient
 	private Placement placement;
+	@Transient
 	private Collection<Credit> credits = new ArrayList<Credit>();
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Conseiller conseiller;
-	private String typeClient; //particulier si client Particulier et entreprise si client Entreprise
+	private String typeClient; // particulier si client Particulier et
+								// entreprise si client Entreprise
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idClient;
 	private String email;
-
-
 
 	public String getEmail() {
 		return email;
@@ -40,14 +56,21 @@ public class Client extends Personne {
 	}
 
 	/**
-	 * Constructeur de Client auquel est associé à la classe Personne et son adresse
-	 * @param nom 	Correspond au nom du client
-	 * @param prenom 	Correspond au prenom du client
-	 * @param telephone Correspond au téléphone de la client
-	 * @param id	Correspond au numéro d'identification du client
-	 * @param sonAdresse Correspond à l'adresse du client
+	 * Constructeur de Client auquel est associï¿½ ï¿½ la classe Personne et son
+	 * adresse
+	 * 
+	 * @param nom
+	 *            Correspond au nom du client
+	 * @param prenom
+	 *            Correspond au prenom du client
+	 * @param telephone
+	 *            Correspond au tï¿½lï¿½phone de la client
+	 * @param id
+	 *            Correspond au numï¿½ro d'identification du client
+	 * @param sonAdresse
+	 *            Correspond ï¿½ l'adresse du client
 	 */
-	
+
 	public Client(String nom, String prenom, String telephone, int id, Adresse sonAdresse, String typeClient) {
 		super(nom, prenom, telephone, id, sonAdresse);
 		// TODO Auto-generated constructor stub
@@ -57,6 +80,7 @@ public class Client extends Personne {
 		super(nom, prenom, telephone, id, sonAdresse);
 		// TODO Auto-generated constructor stub
 	}
+
 	public Collection<Compte> getComptes() {
 		return comptes;
 	}
@@ -73,9 +97,7 @@ public class Client extends Personne {
 		this.credits = credits;
 	}
 
-	
-	
-	public Client(Collection<Compte> comptes, Placement placement,  Conseiller conseiller) {
+	public Client(Collection<Compte> comptes, Placement placement, Conseiller conseiller) {
 		super();
 		this.comptes = comptes;
 		this.placement = placement;
@@ -106,13 +128,8 @@ public class Client extends Personne {
 		this.conseiller = conseiller;
 	}
 
-	
-	
-
 	public Client() {
 		super();
 	}
-
-
 
 }

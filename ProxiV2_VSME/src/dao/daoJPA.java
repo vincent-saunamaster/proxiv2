@@ -3,6 +3,7 @@ package dao;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import dao.DaoQualificator.TypeDAO;
 import metier.Adresse;
 import metier.Agence;
 import metier.CarteBancaire;
@@ -19,6 +20,7 @@ import service.exception.LeConseillerADeja10Clients;
 import service.exception.MontantNegatifException;
 import service.exception.MontantSuperieurAuSoldeException;
 
+@DaoQualificator(TypeDAO.JPA)
 public class daoJPA implements IDao {
 
 	@Override

@@ -3,18 +3,27 @@ package metier;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 /** 
- * Métier Adresse
- * Correspond aux adresses de chaque personnes (Client, Conseiller, Gérant, Agence)
+ * Mï¿½tier Adresse
+ * Correspond aux adresses de chaque personnes (Client, Conseiller, Gï¿½rant, Agence)
  * @author Vincent,Marine
  *
  */
+@Entity
 public class Adresse {
 
 	private String adresse;
 	private int codePostale;
 	private String ville;
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idAdresse;
 	
 	public int getIdAdresse() {
@@ -24,7 +33,9 @@ public class Adresse {
 		this.idAdresse = idAdresse;
 	}
 
-	private Collection <Personne> lesPersonnes  = new ArrayList();
+	@OneToMany(mappedBy="sonAdresse")
+	private Collection <Personne> lesPersonnes  = new ArrayList<Personne>();
+	@Transient
 	private Agence monAgence;
 	
 	
@@ -62,8 +73,8 @@ public class Adresse {
 
 
 	/**
-	 * Constructeur à 3 arguments de l'Adresse
-	 * @param adresse correspond au numéro et  nom de rue
+	 * Constructeur ï¿½ 3 arguments de l'Adresse
+	 * @param adresse correspond au numï¿½ro et  nom de rue
 	 * @param codePostale Correspond au Code postale de la ville
 	 * @param ville Correspond au nom de la ville
 	 */

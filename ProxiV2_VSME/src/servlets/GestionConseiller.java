@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,8 @@ import metier.ClientEntreprise;
 import metier.ClientParticulier;
 import metier.Compte;
 import service.IConseiller;
-import service.Services;
+import service.ServiceQualificator;
+import service.ServiceQualificator.TypeSERVICE;
 import service.exception.DecouvertNonAutorise;
 import service.exception.LeConseillerADeja10Clients;
 import service.exception.MontantNegatifException;
@@ -30,6 +32,10 @@ import service.exception.MontantSuperieurAuSoldeException;
 @WebServlet("/GestionConseiller")
 public class GestionConseiller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	@ServiceQualificator(TypeSERVICE.CDI)
+	private IConseiller ic1;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -82,8 +88,8 @@ public class GestionConseiller extends HttpServlet {
 			if (request.getParameter("id") != null && request.getParameter("pwd") != null) {
 				String id = request.getParameter("id");
 				String pwd = request.getParameter("pwd");
-				IConseiller ic = new Services();
-				int idCons = ic.authentificationConseiller(id, pwd);
+				//IConseiller ic = new Services();
+				int idCons = ic1.authentificationConseiller(id, pwd);
 				if (idCons != 0) {
 					session.setAttribute("idConseiller", idCons);
 					session.setAttribute("login", "Conseiller");
@@ -107,7 +113,7 @@ public class GestionConseiller extends HttpServlet {
 		/**
 		 * listes clients pour l'interface conseiller
 		 */
-		IConseiller ic1 = new Services();
+		//IConseiller ic1 = new Services();
 		Collection<Client> colcli1 = ic1
 				.listerClient(Integer.parseInt(session.getAttribute("idConseiller").toString()));
 		request.setAttribute("listeclients", colcli1);
@@ -169,9 +175,9 @@ public class GestionConseiller extends HttpServlet {
 						adr.setVille(request.getParameter("ville"));
 						c.setSonAdresse(adr);
 						c.setTypeClient(request.getParameter("typeclient"));
-						IConseiller ic = new Services();
+						//IConseiller ic = new Services();
 						try {
-							ic.ajouterClient(Integer.parseInt(session.getAttribute("idConseiller").toString()), c);
+							ic1.ajouterClient(Integer.parseInt(session.getAttribute("idConseiller").toString()), c);
 						} catch (NumberFormatException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -192,9 +198,9 @@ public class GestionConseiller extends HttpServlet {
 						adr.setVille(request.getParameter("ville"));
 						c.setSonAdresse(adr);
 						c.setTypeClient(request.getParameter("typeclient"));
-						IConseiller ic = new Services();
+						//IConseiller ic = new Services();
 						try {
-							ic.ajouterClient(Integer.parseInt(session.getAttribute("idConseiller").toString()), c);
+							ic1.ajouterClient(Integer.parseInt(session.getAttribute("idConseiller").toString()), c);
 						} catch (NumberFormatException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -257,9 +263,9 @@ public class GestionConseiller extends HttpServlet {
 			// si une erreur de formulaire, on
 			// renvoie sur le formulaire avec client
 			if (validform == false) {
-				IConseiller ic = new Services();
+				//IConseiller ic = new Services();
 				int idclientform = Integer.parseInt(request.getParameter("idclientform").toString());
-				Collection<Client> colcli = ic
+				Collection<Client> colcli = ic1
 						.listerClient(Integer.parseInt(session.getAttribute("idConseiller").toString()));
 				for (Client client : colcli) {
 					if (client.getIdClient() == idclientform) {
@@ -271,9 +277,9 @@ public class GestionConseiller extends HttpServlet {
 			} else {
 
 				// sinon on envoie le tout en BDD
-				IConseiller ic = new Services();
+				//IConseiller ic = new Services();
 				int idcli = Integer.parseInt(request.getParameter("idclientform").toString());
-				Collection<Client> colcli = ic
+				Collection<Client> colcli = ic1
 						.listerClient(Integer.parseInt(session.getAttribute("idConseiller").toString()));
 				for (Client client : colcli) {
 					if (client.getIdClient() == idcli) {
@@ -281,7 +287,7 @@ public class GestionConseiller extends HttpServlet {
 						adr.setAdresse(request.getParameter("adresse"));
 						adr.setCodePostale((Integer.parseInt(request.getParameter("codepostal"))));
 						adr.setVille(request.getParameter("ville"));
-						ic.modifierClient(client, request.getParameter("nom"), request.getParameter("prenom"), adr,
+						ic1.modifierClient(client, request.getParameter("nom"), request.getParameter("prenom"), adr,
 								request.getParameter("email"));
 					}
 				}
@@ -294,9 +300,9 @@ public class GestionConseiller extends HttpServlet {
 
 			if (request.getParameter("idclientform") != null) {
 				// par d�faut, on envoie sur le formulaire avec le client
-				IConseiller ic = new Services();
+				//IConseiller ic = new Services();
 				int idclientform = Integer.parseInt(request.getParameter("idclientform").toString());
-				Collection<Client> colcli = ic
+				Collection<Client> colcli = ic1
 						.listerClient(Integer.parseInt(session.getAttribute("idConseiller").toString()));
 				for (Client client : colcli) {
 					if (client.getIdClient() == idclientform) {

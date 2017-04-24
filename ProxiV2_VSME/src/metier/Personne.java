@@ -1,10 +1,26 @@
 package metier;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Personne {
 	private String nom;
 	private String prenom;
 	private String telephone;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID_PERSONNE")
 	private int id;
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Adresse sonAdresse;
 	
 
@@ -55,7 +71,7 @@ public class Personne {
 	 * @param nom Nom de la personne
 	 * @param prenom Prenom de la personne
 	 * @param telephone Telephone de la personne
-	 * @param id Numéro d'identifiant de la personne
+	 * @param id Numï¿½ro d'identifiant de la personne
 	 * @param sonAdresse Adresse de la personne
 	 */
 	public Personne(String nom, String prenom, String telephone, int id, Adresse sonAdresse) {

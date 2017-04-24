@@ -1,13 +1,29 @@
 package metier;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Compte {
 
 	private int numeroCompte;
 	private double solde;
 	private String dateOuverture;
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Client client;
+	@Transient
 	private CarteBancaire carteBancaire;
 	String typeCompte; //epargne si compte epargne ou courant si compte courant
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idCompte;
 	
 	

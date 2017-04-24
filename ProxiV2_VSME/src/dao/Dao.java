@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import dao.DaoQualificator.TypeDAO;
 import metier.Adresse;
 import metier.Agence;
 import metier.CarteBancaire;
@@ -27,6 +28,7 @@ import service.exception.LeConseillerADeja10Clients;
 import service.exception.MontantNegatifException;
 import service.exception.MontantSuperieurAuSoldeException;
 
+@DaoQualificator(TypeDAO.JDBC)
 public class Dao implements IDao {
 
 	/**

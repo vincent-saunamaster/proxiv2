@@ -3,10 +3,26 @@ package metier;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+@DiscriminatorValue("CONSEILLER")
 public class Conseiller extends Personne {
 
+	@OneToMany(mappedBy="conseiller")
 	private Collection<Client> clients = new ArrayList<Client>();
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Gerant gerant;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idConseiller;
 	
 	
@@ -59,8 +75,8 @@ public class Conseiller extends Personne {
 	 * Constructeur Conseiller avec 5 arguments
 	 * @param nom Nom du conseiller
 	 * @param prenom Prenom du conseiller
-	 * @param telephone Téléphone du conseiller
-	 * @param id Numéro d'identification du conseiller
+	 * @param telephone Tï¿½lï¿½phone du conseiller
+	 * @param id Numï¿½ro d'identification du conseiller
 	 * @param sonAdresse Adresse du conseiller (rue, code postale, ville) de la classe Adresse
 	 */
 	public Conseiller(String nom, String prenom, String telephone, int id, Adresse sonAdresse) {
